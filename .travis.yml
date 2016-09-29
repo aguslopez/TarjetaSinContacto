@@ -12,6 +12,7 @@ script:
   - phpunit
   - mkdir -p build/logs
   - php vendor/bin/phpunit -c phpunit.xml
+  - php vendor/bin/phpcov.php merge --clover build/logs/clover.xml build/cov
   
 after_success:
   - travis_retry php vendor/bin/coveralls
