@@ -1,7 +1,11 @@
 {
 	"name": "Poli/Tarjeta",
 	"require": {
-		"phpunit/phpunit": "^5.5"
+		"phpunit/phpunit": "^5.5",
+		
+		"satooshi/php-coveralls": "dev-master",
+		
+        	"phpunit/phpcov": "2.*"
 	},
 	"autoload": {
 		"psr-4": {
