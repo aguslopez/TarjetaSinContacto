@@ -1,5 +1,5 @@
 {
-	"name": "poli/testing",
+	"name": "poli/probando_travisci",
 	"require": {
 		"phpunit/phpunit": "^5.5"
 	},
@@ -7,8 +7,10 @@
 		"satooshi/php-coveralls": "dev-master"
 	},
 	"autoload": {
-		"psr-4": {
-			"Transporte\\": "src"
+	      	"psr-4": {
+		   	"Transporte\\": "src"
 		}
 	}
 }
+
+
