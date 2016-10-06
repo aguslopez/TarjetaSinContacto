@@ -5,15 +5,12 @@ php:
 before_script:
   - wget http://getcomposer.org/composer.phar
   - php composer.phar install
-  - wget https://github.com/satooshi/php-coveralls/releases/download/v1.0.0/coveralls.phar
-  - chmod +x coveralls.phar
 
 script:
   - phpunit
   - mkdir -p build/logs
   - php vendor/bin/phpunit -c phpunit.xml
-  - php vendor/bin/phpcov.php merge --clover build/logs/clover.xml build/cov
   
 after_success:
   - travis_retry php vendor/bin/coveralls
-  - travis_retry php vendor/bin/coveralls -v
+
