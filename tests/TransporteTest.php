@@ -64,25 +64,12 @@ class TransporteTest extends TestCase {
 		$this->tarjeta->saldo = 100;
 		$saldo_aux = $this->tarjeta->saldo();
 		$this->assertEquals($saldo_aux, $this->tarjeta->saldo);
-		
-		//Test Function Recargar sin beneficio
-		$this->tarjeta->saldo = 0;
-		$this->tarjeta->recargar(30);
-		$this->assertEquals($this->tarjeta->saldo, 30);
-		
-		$this->tarjeta->saldo = 0;
-		$this->tarjeta->recargar(700);
-		$this->assertEquals($this->tarjeta->saldo, 700);
 
-		//Test Function Recargar 290
+		//Test Function Recargar 
 		$this->tarjeta->saldo = 0;
 		$this->tarjeta->recargar(290);
 		$this->assertEquals($this->tarjeta->saldo, 340);
-		
-		//Test Function Recargar 544
-		$this->tarjeta->saldo = 0;
-		$this->tarjeta->recargar(544);
-		$this->assertEquals($this->tarjeta->saldo, 680);
+
 		
 		//Test Function Pagar (Con tarjeta comun) -> Colectivo
 		$saldo_inicial = $this->tarjeta->saldo();
