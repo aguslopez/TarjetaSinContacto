@@ -71,14 +71,12 @@ class TransporteTest extends TestCase {
 		$this->assertEquals($this->tarjeta->saldo, 30);
 
 		//Test Function Recargar 290
-		$this->tarjeta->saldo = 0;
 		$this->tarjeta->recargar(290);
-		$this->assertEquals($this->tarjeta->saldo, 340);
+		$this->assertEquals($this->tarjeta->saldo, 370);
 		
 		//Test Function Recargar 544
-		$this->tarjeta->saldo = 0;
 		$this->tarjeta->recargar(544);
-		$this->assertEquals($this->tarjeta->saldo, 680);
+		$this->assertEquals($this->tarjeta->saldo, 914);
 		
 		//Test Function Pagar (Con tarjeta comun) -> Colectivo
 		$saldo_inicial = $this->tarjeta->saldo();
