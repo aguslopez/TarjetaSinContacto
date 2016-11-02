@@ -41,7 +41,7 @@ class Tarjeta implements InterfaceTarjeta {
 		if ($monto == 290) {
 			$this->saldo += 340;
 		}
-		else if ($monto = 544) {
+		else if ($monto == 544) {
 			$this->saldo += 680;
 		}
 		else {
