@@ -56,7 +56,7 @@ class TransporteTest extends TestCase {
 		$this->assertEquals($tarjeta4->saldo(), 254, "Se descontaron los plus");
 		
 		//Test Function Viajes
-		$this->assertEquals($tarjeta->viajesRealizados(), 4, "4 viajes realizados");
+		$this->assertEquals($tarjeta1->viajesRealizados(), 4, "4 viajes realizados");
 	}
 
 	//Test class MedioBoleto
