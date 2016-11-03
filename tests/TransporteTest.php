@@ -99,17 +99,6 @@ class TransporteTest extends TestCase {
 		$this->assertEquals($medio1->saldo(), 314, "Descuento bicicleta con medio");
 	}
 
-	//Test Class Transporte
-	public function testTransporte() {
-
-		//Test Function tipo (Colectivo)
-		$colectivo102 = new Colectivo("102", "Rosario Bus");
-		$this->assertEquals($colectivo102->tipo(), "Colectivo");
-
-		//Test Function tipo (Bicicleta)
-		$bici2 = new Bicicleta("789");
-		$this->assertEquals($bici2->tipo(), "Bicicleta");
-	}
 
 	//Test Class Viaje
 	public function testViaje() {
