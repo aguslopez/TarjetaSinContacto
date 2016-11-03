@@ -63,7 +63,7 @@ class Tarjeta implements InterfaceTarjeta {
 			}
 		}
 		//Si el transporte es una bicicleta 
-		else if($transporte->tipo() == "Bicicleta") {
+		else if($transporte->tipo == "Bicicleta") {
 			if(strtotime($fechaHora) - strtotime($this->ultimaHora) > 86400) {
 				$this->saldo -= $this->boletoBici;
 			}
