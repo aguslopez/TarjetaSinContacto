@@ -19,8 +19,7 @@ class TransporteTest extends TestCase {
 		$tarjeta1->recargar(272);
 		$this->assertEquals($tarjeta1->saldo(), 320, "Cargo 272 y me dan 320");
 
-		
-     		 //Test Function Pagar (Tarjeta comun, primer colectivo)
+		//Test Function Pagar (Tarjeta comun, primer colectivo)
  		$colectivoK = new Colectivo("Linea K", "Semtur");
  		$tarjeta1->pagar($colectivoK, "2016/06/30 20:50");
  		$this->assertEquals($tarjeta1->saldo(), 312, "Descuento un viaje normal");
@@ -75,6 +74,16 @@ class TransporteTest extends TestCase {
 		$colectivo143Rojo = new Colectivo("143 rojo", "Rosario Bus");
 		$medio->pagar($colectivo143Rojo, "2016/06/30 20:30");
 		$this->assertEquals($medio->saldo(), 314.67, "Medio boleto y trasbordo");
+	}
+	
+	//Test Class Pase Libre
+	public function testPaseLibre() {
+		
+		//Test Function Pagar con Pase Libre
+		$pase = new PaseLibre(1);
+		$colectivo135 = new Colectivo("135", "Rosario Bus");
+		$pase->pagar($colectivo135, "2016/06/30 20:00");
+		$this->assertEquals($pase->saldo(), 0, "Pase libre");
 	}
 
 	//Test Class Bicicleta
