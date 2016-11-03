@@ -7,7 +7,7 @@ class Colectivo extends Transporte {
 	public $linea;
 	public $tipo;
 
-	public function __construct($nombre, $linea) {
+	public function __construct($linea, $nombre) {
 		$this->tipo = "Colectivo";
 		$this->nombre = $nombre;
 		$this->linea = $linea;
