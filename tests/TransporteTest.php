@@ -136,7 +136,7 @@ class TransporteTest extends TestCase {
 		$this->assertEquals($transporte, "144 Negro");
 
 		//Test Function Tiempo
-		$tiempo = $viaje->tiempo();
+		$tiempo = $viaje->fechaHora();
 		$this->assertEquals($tiempo, "27/09/16 14:44");
 	}
 
