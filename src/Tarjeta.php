@@ -19,10 +19,9 @@ class Tarjeta implements InterfaceTarjeta {
 		$this->saldo = 0;
 		$this->id = $id;
 		$this->viajesPlus = 0;
-		$this->viajes = 0;
-		$this->boletoColectivo = 8.50;
+		$this->boletoColectivo = 8;
 		$this->boletoBici = 12;
-		$this->trasbordo = 2.64;
+		$this->trasbordo = (float)((int)($this->boletoColectivo/3*100)/100);
 	}
 
 	public function pagar(Transporte $transporte, $fechaHora) {
@@ -38,7 +37,7 @@ class Tarjeta implements InterfaceTarjeta {
 				$this->viajesPlus += 1;
 			}
 			//Pago pasaje normal, pero reviso el trasbordo
-			elseif($this->saldo > $this->boletoColectivo){
+			else if($this->saldo > $this->boletoColectivo){
 				//Si me subí a un colectivo distinto al anterior
 				if($transporte->linea != $this->ultimoColectivo) {
 					//Si es el primer colectivo, pago pasaje normal
@@ -75,14 +74,14 @@ class Tarjeta implements InterfaceTarjeta {
 	}
 
 	public function recargar($monto) {
-		if ($monto == 290) {
-			$this->saldo += 340;
+		if ($monto < 272) {
+			$this->saldo += $monto
 		}
-		else if ($monto == 544) {
-			$this->saldo += 680;
+		else if ($monto < 500) {
+			$this->saldo = $this->saldo + $monto + 48;
 		}
 		else {
-			$this->saldo += $monto;
+			$this->saldo = $this->saldo + $monto + 140;
 		}
 
 		$this->viajesPlus = 0;
