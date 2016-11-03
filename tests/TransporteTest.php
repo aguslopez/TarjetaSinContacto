@@ -96,7 +96,7 @@ class TransporteTest extends TestCase {
 		$this->assertEquals($tarjeta5->saldo(), 328, "Descuento bicicleta");
 
 		//Test Function Nombre
-		$this->assertEquals($bici->nombre(), 123, "Patente de la bicicleta")
+		$this->assertEquals($bici->nombre(), 123, "Patente de la bicicleta");
 
 		$medio1 = new MedioBoleto(2);
 		$medio1->recargar(290);
