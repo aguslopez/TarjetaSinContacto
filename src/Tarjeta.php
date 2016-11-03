@@ -24,7 +24,7 @@ class Tarjeta implements InterfaceTarjeta {
 
 	public function pagar(Transporte $transporte, $fechaHora) {
 		//Si el transporte es un colectivo
-		if ($transporte->tipo() == "Colectivo") {
+		if ($transporte->tipo == "Colectivo") {
 			//Si ya no quedan viajes plus y no alcanza el saldo, muestra "Tarjeta sin saldo"
 			if($this->viajesPlus == 2 && $this->saldo < $this->boletoColectivo) {
 				return "Tarjeta sin saldo";
