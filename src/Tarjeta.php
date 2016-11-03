@@ -6,7 +6,6 @@ class Tarjeta implements InterfaceTarjeta {
 	public $id;
 	public $viajes;
 	public $saldo;
-	public $descuento;
 	public $trasbordo;
 	public $ultimoColectivo;
 	public $ultimaHora;
@@ -15,7 +14,6 @@ class Tarjeta implements InterfaceTarjeta {
 	public $boletoBici;
 
 	public function __construct($id) {
-		$this->descuento = 1;
 		$this->saldo = 0;
 		$this->id = $id;
 		$this->viajesPlus = 0;
@@ -47,11 +45,11 @@ class Tarjeta implements InterfaceTarjeta {
 					//Si es el segundo colectivo, pago pasaje con trasbordo
 					else {
 						if(strtotime($fechaHora) - strtotime($this->ultimaHora) <= 3600) {
-							$this->saldo -= $this->trasbordo;
+							$this->saldo = $this->saldo - $this->trasbordo;
 						}
 						//Sino, pago pasaje normal
 						else {
-							$this->saldo -= $this->boletoColectivo;
+							$this->saldo = $this->saldo - $this->boletoColectivo;
 						}
 					}
 				}
