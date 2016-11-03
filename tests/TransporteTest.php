@@ -32,7 +32,7 @@ class TransporteTest extends TestCase {
 
 		//Test Function Pagar (Tarjeta comun, mismo colectivo que el anterior)
 		$tarjeta1->pagar($colectivo120, "2016/06/30 23:20");
-		$this->assertEquals($tarjeta->saldo(), 301.34, "Mismo colectivo, sin trasbordo");
+		$this->assertEquals($tarjeta1->saldo(), 301.34, "Mismo colectivo, sin trasbordo");
 
 		//Test Function Pagar (Tarjeta comun, colectivo cualquiera)
 		$tarjeta1->pagar($colectivoK, "2016/07/01 01:50");
