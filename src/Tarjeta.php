@@ -37,30 +37,31 @@ class Tarjeta implements InterfaceTarjeta {
 			//Pago pasaje normal, pero reviso el trasbordo
 			else if($this->saldo > $this->boletoColectivo){
 				//Si me subí a un colectivo distinto al anterior
-				if($transporte->linea != $this->ultimoColectivo) {
-					//Si es el primer colectivo, pago pasaje normal
-					if($this->viajes == 0) {
-						$this->saldo -= $this->boletoColectivo;
-					}
-					//Si es el segundo colectivo, pago pasaje con trasbordo
-					else {
-						if(strtotime($fechaHora) - strtotime($this->ultimaHora) <= 3600) {
-							$this->saldo = $this->saldo - $this->trasbordo;
+								if ($transporte->linea != $this->ultimoColectivo){
+								if ($this->viajes == 0){
+									$this->saldo = $this->saldo - $this->boletoColectivo;
+									//print "\nAbordando " . $transporte->tipo . " " . $transporte->linea . "\n";
+								}
+								else{
+									if (strtotime($fechaHora) - strtotime($this->ultimaHora) <= 3600){
+										$this->saldo = $this->saldo - $this->trasbordo;
+										//print "\nTransbordo a " . $transporte->tipo . " " . $transporte->linea . "\n";
+									}
+									else{
+										$this->saldo = $this->saldo - $this->boletoColectivo;
+										//print "\nAbordando " . $transporte->tipo . " " . $transporte->linea . "\n";
+									}
+								}
+							}
+							else{
+								$this->saldo = $this->saldo - $this->boletoColectivo;
+								//print "\nAbordando nuevamente " . $transporte->tipo . " " . $transporte->linea . "\n";
+							}
+
+							$this->ultimoColectivo = $transporte->linea;
+							$this->ultimaHora = $fechaHora;
+							$this->viajes = $this->viajes + 1;
 						}
-						//Sino, pago pasaje normal
-						else {
-							$this->saldo = $this->saldo - $this->boletoColectivo;
-						}
-					}
-				}
-				//Si me subo a un colectivo igual al anterior, pago pasaje normal
-				else {
-					$this->saldo -= $this->boletoColectivo;
-				}
-				$this->ultimoColectivo = $transporte->linea;
-				$this->ultimaHora = $fechaHora;
-				$this->viajes += 1;
-			}
 		}
 		//Si el transporte es una bicicleta 
 		else if($transporte->tipo == "Bicicleta") {
