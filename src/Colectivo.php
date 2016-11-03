@@ -5,6 +5,7 @@ namespace Transporte;
 class Colectivo extends Transporte {
 	public $nombre;
 	public $linea;
+	public $tipo;
 
 	public function __construct($nombre, $linea) {
 		$this->tipo = "Colectivo";
