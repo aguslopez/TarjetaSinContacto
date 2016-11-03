@@ -20,12 +20,15 @@ class TransporteTest extends TestCase {
 		$this->assertEquals($tarjeta1->saldo(), 320, "Cargo 272 y me dan 320");
 
 		
-      $colectivo144Negro = new Colectivo("144 Negro", "Rosario Bus");    
-    $tarjeta1->pagar($colectivo144Negro, "2016/06/30 20:50");
-    $this->assertEquals($tarjeta1->saldo(), 312, "Saca 8pe de la carga");
-    $colectivo135 = new Colectivo("135 Azul", "Rosario Bus");
-    $tarjeta1->pagar($colectivo135, "2016/06/30 21:10");
-    $this->assertEquals($tarjeta1->saldo(), 309.34, "Transbordo de bondi ");
+     		 //Test Function Pagar (Tarjeta comun, primer colectivo)
+ 		$colectivoK = new Colectivo("Linea K", "Semtur");
+ 		$tarjeta1->pagar($colectivoK, "2016/06/30 20:50");
+ 		$this->assertEquals($tarjeta1->saldo(), 312, "Descuento un viaje normal");
+ 
+ 		//Test Function Pagar (Tarjeta comun, segundo colectivo con trasbordo)
+ 		$colectivo120 = new Colectivo("120", "Semtur");
+ 		$tarjeta1->pagar($colectivo120, "2016/06/30 21:10");
+ 		$this->assertEquals($tarjeta1->saldo(), 309.34, "Trasbordo");
 
 		//Test Function Pagar (Tarjeta comun, mismo colectivo que el anterior)
 		$tarjeta1->pagar($colectivo120, "2016/06/30 23:20");
@@ -117,14 +120,6 @@ class TransporteTest extends TestCase {
 		//Test Function Tiempo
 		$tiempo = $viaje->fechaHora();
 		$this->assertEquals($tiempo, "27/09/16 14:44");
-	}
-
-	//Test Class Colectivo
-	public function testColectivo() {
-
-		$colectivo143 = new Colectivo("143 Negro", "Rosario Bus");
-		$nombre = $colectivo143->nombre();
-		$this->assertEquals($nombre, "143 Negro");
 	}
 
 	//Test Class Boleto
