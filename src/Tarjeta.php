@@ -75,7 +75,7 @@ class Tarjeta implements InterfaceTarjeta {
 
 	public function recargar($monto) {
 		if ($monto < 272) {
-			$this->saldo += $monto
+			$this->saldo += $monto;
 		}
 		else if ($monto < 500) {
 			$this->saldo = $this->saldo + $monto + 48;
