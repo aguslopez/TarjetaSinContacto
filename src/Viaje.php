@@ -6,13 +6,13 @@ class Viaje {
 	public $tipo;
 	public $monto;
 	public $transporte;
-	public $tiempo;
+	public $fechaHora;
 
-	public function __construct($tipo, $monto, $transporte, $tiempo) {
+	public function __construct($tipo, $monto, $transporte, $fechaHora) {
 		$this->tipo = $tipo;
 		$this->monto = $monto;
 		$this->transporte = $transporte;
-		$this->tiempo = $tiempo;
+		$this->fechaHora = $fechaHora;
 	}
 
 	public function tipo() {
@@ -27,7 +27,7 @@ class Viaje {
 		return $this->transporte;
 	}
 
-	public function tiempo() {
-		return $this->tiempo;
+	public function fechaHora() {
+		return $this->fechaHora;
 	}
 }

@@ -3,37 +3,74 @@
 namespace Transporte;
 
 class Tarjeta implements InterfaceTarjeta {
-	public $viajes = [];
-	public $saldo = 0;
+	public $id;
+	public $viajes;
+	public $saldo;
 	public $descuento;
+	public $trasbordo;
+	public $ultimoColectivo;
+	public $ultimaHora;
+	public $viajesPlus;
+	public $boletoColectivo;
+	public $boletoBici;
 
-	public function __construct() {
+	public function __construct($id) {
 		$this->descuento = 1;
+		$this->saldo = 0;
+		$this->id = $id;
+		$this->viajesPlus = 0;
+		$this->viajes = 0;
+		$this->boletoColectivo = 8.50;
+		$this->boletoBici = 12;
+		$this->trasbordo = 2.64;
 	}
 
 	public function pagar(Transporte $transporte, $fechaHora) {
+		//Si el transporte es un colectivo
 		if ($transporte->tipo() == "Colectivo") {
-			$trasbordo = false;
-			if (count($this->viajes) > 0) {
-				if (end($this->viajes)->tiempo() - strtotime($fechaHora) < 3600) {
-					$trasbordo = true;
+			//Si ya no quedan viajes plus y no alcanza el saldo, muestra "Tarjeta sin saldo"
+			if($this->viajesPlus == 2 && $this->saldo < $this->boletoColectivo) {
+				return "Tarjeta sin saldo";
+			}
+			//Si quedan viajes plus pero no alcanza el saldo, pago con viaje plus
+			if($this->viajesPlus < 2 && $this->saldo < $this->boletoColectivo) {
+				$this->saldo -= $this->boletoColectivo;
+				$this->viajesPlus += 1;
+			}
+			//Pago pasaje normal, pero reviso el trasbordo
+			elseif($this->saldo > $this->boletoColectivo){
+				//Si me subí a un colectivo distinto al anterior
+				if($transporte->linea != $this->ultimoColectivo) {
+					//Si es el primer colectivo, pago pasaje normal
+					if($this->viajes == 0) {
+						$this->saldo -= $this->boletoColectivo;
+					}
+					//Si es el segundo colectivo, pago pasaje con trasbordo
+					else {
+						if(strtotime($fechaHora) - strtotime($this->ultimaHora) <= 3600) {
+							$this->saldo -= $this->trasbordo;
+						}
+						//Sino, pago pasaje normal
+						else {
+							$this->saldo -= $this->boletoColectivo;
+						}
+					}
 				}
+				//Si me subo a un colectivo igual al anterior, pago pasaje normal
+				else {
+					$this->saldo -= $this->boletoColectivo;
+				}
+				$this->ultimoColectivo = $transporte->linea;
+				$this->ultimaHora = $fechaHora;
+				$this->viajes += 1;
 			}
-
-			$monto = 0;
-			if ($trasbordo) {
-				$monto = 2.81 * $this->descuento;
+		}
+		//Si el transporte es una bicicleta 
+		else if($transporte->tipo() == "Bicicleta") {
+			if(strtotime($fechaHora) - strtotime($this->ultimaHora) > 86400) {
+				$this->saldo -= $this->boletoBici;
 			}
-			else {
-				$monto = 8.50 * $this->descuento;
-			}
-
-			$this->viajes[] = new Viaje($transporte->tipo(), $monto, $transporte, strtotime($fechaHora));
-			$this->saldo -= $monto;
-		} 
-		else if ($transporte->tipo() == "Bicicleta") {
-			$this->viajes[] = new Viaje($transporte->tipo(), 12, $transporte, strtotime($fechaHora));
-			$this->saldo -= 12;
+			$this->viajes += 1;
 		}
 	}
 
@@ -47,6 +84,8 @@ class Tarjeta implements InterfaceTarjeta {
 		else {
 			$this->saldo += $monto;
 		}
+
+		$this->viajesPlus = 0;
 	}
 
 	public function saldo() { 
